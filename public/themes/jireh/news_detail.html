@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>以勒动态</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link rel="stylesheet" type="text/css" href="css/public.css">
+<link rel="stylesheet" type="text/css" href="css/m-style.css">
+<body>
+
+<div class="web-nav" id="menu">
+<div class="site-top-menu">
+<div class="site-logo">
+	<a href="index.html"><img src="img/logo-top.png"></a>
+</div>
+<div class="head-nav-box">
+	<div id="pageMask"></div>
+	<div id="headNavBtn">导航</div>
+<ul class="head-list-nav">
+	<li data-menuanchor="page1"><a href="index.html#page1">首页<em></em></a></li>
+	<li data-menuanchor="page2"><a href="index.html#page2">服务范围<em></em></a></li>
+	<li data-menuanchor="page3"><a href="index.html#page3">推荐案例<em></em></a></li>
+	<li data-menuanchor="page4"><a href="index.html#page4">关于以勒<em></em></a></li>
+	<li data-menuanchor="page5" class="active"><a href="index.html#page5">以勒动态<em></em></a></li>
+	<li data-menuanchor="page6"><a href="index.html#page6">技术团队<em></em></a></li>
+	<li><a href="Job.html">招兵买马<em></em></a></li>
+	<li><a href="contact.html">联系我们<em></em></a></li>
+</ul>
+</div>
+<div class="tab-font">
+	<a href="javascript:zh_tran('s');" class="zh_click" id="zh_click_s" style="background: #03A7C6; color: #fff;">简</a> 
+	<a href="javascript:zh_tran('t');" class="zh_click" id="zh_click_t">繁</a>
+</div>
+</div>
+</div>
+
+<!-- route S -->
+<div class="d_com_route_container">
+<div class="d_com_route"><span class="d_left route_link"><a href="index.html">首页</a><i></i><a href="companynews.html">以勒动态</a><i></i><a href="javascript:;" class="selected"><em>联系我们</em></a></span></div>
+</div>
+<!-- route E -->
+
+<div class="d_contact_con_container">
+<div class="d_contact_content">
+<div class="d_com_contact_tit_cn_en mt_70">
+<div class="con_encn_partition"></div>
+<div class="d_com_contact_tit_cn" id="newsTit">动态标题</div>
+</div>
+
+<div class="d_com_contact_map_box mt_70">
+<div id="newContent">动态内容</div>
+
+<div class="about-news-tit">
+	<p>上一篇：<a id="preNews"></a></p>
+	<p>下一篇：<a id="nextNews"></a></p>
+</div>
+
+</div>
+<div class="m_h_60"></div>
+</div>
+</div>
+
+<!-- seventh column S -->
+		<div class="foot_container clearfix mt_60">
+			<div class="foot clearfix">
+				<div class="foot_ltd_catnav">
+					<h3>快速链接<i></i></h3>
+					<ul>
+						<li><a href="#">网站首页</a></li>
+						<li><a href="#">服务范围</a></li>
+						<li><a href="#">关于我们</a></li>
+						<li><a href="#">推荐案例</a></li>
+						<li><a href="#">技术团队</a></li>
+					</ul>
+				</div>				
+				<div class="foot_ltd_address">
+				<h3>联系我们<i></i></h3>
+				<ul>
+					<li><i class="icon_2"></i>400-0000-000</li>
+					<li><i class="icon_1"></i>地址：广东省中山市石歧区彩虹路城市空间</li>
+					<li><i class="icon_4"></i>2859477008@qq.com</li>
+					<li><i class="icon_4"></i>2859477008</li>
+				</ul>
+				</div>
+			<div class="foot_ltdint_qrcode"><img src="img/logo-ico.png"></div>
+			</div>
+		</div>
+		<!-- seventh column E -->
+		<div class="foot_b">©2016 Muse architcture templates by Pix-theme</div>	
+
+
+<script src="js/jQuery-v1.8.3.min.js"></script>
+<script src="js/tans.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
+<script>
+	pageNav('headNavBtn','head-list-nav');
+	
+	
+	
+	//获取id
+	var idNum=0;
+	var pageUrl=this.window.location.href;
+	idNum=pageUrl.indexOf("?id=");
+	var newsId=0;
+	if(idNum!=-1){
+    	newsId = pageUrl.match(/id=(\S*)/)[1];
+    }else{
+    	newsId=sessionStorage.getItem("newsId");
+    }
+    
+	
+	console.log(newsId);
+	
+	$.ajax({
+		type:"get",
+		url:"js/newsdata.json",
+		async:true,
+		dataType:"JSON",
+		data:{},
+		success:function(newscon){
+			console.log(newscon);
+			//获取各种容器
+			var newsTit=document.getElementById('newsTit');
+			var newContent=document.getElementById('newContent');
+			var routhText=document.getElementsByClassName('selected')[0];
+			var preNews=document.getElementById('preNews');
+			var nextNews=document.getElementById('nextNews');
+//			var bodyTitle=;
+			
+			//赋值
+			for(var i=0; i<newscon.dataCon.length; i++){
+				
+				if(newscon.dataCon[i].id==newsId){
+					newsTit.innerHTML=newscon.dataCon[i].title;
+					newContent.innerHTML=newscon.dataCon[i].newscon;
+					routhText.innerText=newscon.dataCon[i].title;
+					document.title=newscon.dataCon[i].title;
+					if(newscon.dataCon[i].id-1>0){
+						preNews.innerText=newscon.dataCon[i-1].title;
+						preNews.href='news_detail.html?id='+[parseInt(newsId)-1];
+					}else{
+						preNews.innerText="没有最新的";
+						preNews.href='javascript:;';
+					}
+					
+					if(newscon.dataCon[i+1].title!=undefined || newscon.dataCon[i+1].title!=null || newscon.dataCon[i+1].title!=''){
+						nextNews.innerText=newscon.dataCon[i+1].title;
+						nextNews.href='news_detail.html?id='+[parseInt(newsId)+1];
+					}
+					
+				}
+				
+			}
+			
+			
+			
+		}
+	});
+</script>
+
+</body>
+</html>

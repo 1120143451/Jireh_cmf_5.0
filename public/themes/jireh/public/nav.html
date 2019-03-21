@@ -1,21 +1,27 @@
 <div class="web-nav" id="menu">
     <div class="site-top-menu">
         <div class="site-logo">
-            <a href="index.html"><img src="__TMPL__/public/assets/img/logo-top.png"></a>
+            <a href="__ROOT__">
+                <img src="{$theme_vars.logo|cmf_get_image_url|default=''}">
+            </a>
         </div>
         <div class="head-nav-box">
             <div id="pageMask"></div>
             <div id="headNavBtn"><span class="tr_menuNav">導航</span></div>
-            <ul class="head-list-nav">
-                <li data-menuanchor="page1" class="active"><a href="index.html#page1"><span class="tr_index">首頁</span><em></em></a></li>
-                <li data-menuanchor="page2"><a href="index.html#page2"><span class="tr_service">服務範圍</span><em></em></a></li>
-                <li data-menuanchor="page3"><a href="index.html#page3"><span class="tr_case">推薦案例</span><em></em></a></li>
-                <li data-menuanchor="page4"><a href="index.html#page4"><span class="tr_about">關于以勒</span><em></em></a></li>
-                <li data-menuanchor="page5"><a href="index.html#page5"><span class="tr_news">以勒動态</span><em></em></a></li>
-                <li data-menuanchor="page6"><a href="index.html#page6"><span class="tr_tech">技術團隊</span><em></em></a></li>
-                <li><a href="Job.html"><span class="tr_job">招兵買馬</span><em></em></a></li>
-                <li><a href="contact.html"><span class="tr_contact">聯系我們</span><em></em></a></li>
-            </ul>
+            <notempty name="$theme_vars.nav_id">
+                <navigation nav-id="$theme_vars.nav_id" root="ul" class="head-list-nav">
+                    <navigationMenu root="">
+                        <li data-menuanchor="page{$menu.id}">
+                            <a href="{$menu.href|default=''}" target="{$menu.target|default=''}">
+                                {$menu.name|default=''}<em></em>
+                            </a>
+                        </li>
+                    </navigationMenu>
+                </navigation>
+            <else/>
+                <ul>未设置导航请到后台模板管理设置</ul>
+            </notempty>
+
         </div>
         <div class="tab-font">
             <a href="javascript:;" onclick="langTab(0)" class="zh_click">简</a>

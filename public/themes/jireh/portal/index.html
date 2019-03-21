@@ -2,155 +2,123 @@
 
 <block name="body">
     <div id="dowebok">
+    <widget name="home">
         <div class="section page-banner">
             <div id="loadingIco">
                 <div class="logo-img">
                     <div class="m-xz8 xzleft"></div>
-                    <img src="img/logo-ico.png" />
+                    <img src="{$widget.vars.loading_img|cmf_get_image_url|default=''}" />
                     <div class="m-xz9"></div>
                 </div>
                 <div class="loading-soild"><div class="loading-soild-bg" id="progressChild"></div></div>
                 <div id="loadingText"></div>
             </div>
-            <img src="img/banner-bg.png" class="page-banner-img">
+            <img src="__TMPL__/public/assets/img/banner-bg.png" class="page-banner-img">
             <div id="bannerMask"></div>
             <div class="banner-text">
                 <div class="anim-text-box">
-                    <p class="anim-2 tr_personnel_l">以勒人才管理</p>
-                    <p class="anim-1 tr_attr_l">專注、專業、專屬</p>
-                    <p class="anim-3 tr_abs_l">專注于開發服務，專業的技術團隊，打造專屬於您的高端定製。</p>
+                    <notempty name="$widget.vars.left_text">
+                        <php>
+                            $text = explode('|', $widget['vars']['left_text']);
+                        </php>
+                        <p class="anim-2">{$text.0|default=''}</p>
+                        <p class="anim-1">{$text.1|default=''}</p>
+                        <p class="anim-3">{$text.2|default=''}</p>
+                    <else/>
+                        <p class="anim-2">未设置左边动画文字，请到模板管理设置</p>
+                    </notempty>
                 </div>
                 <div class="anim-5">
-                    <img src="img/banner-img2.png">
+                    <img src="{$widget.vars.centered_img|cmf_get_image_url|default=''}">
                 </div>
                 <div class="anim-6">
-                    <img src="img/light-ico.png">
+                    <img src="{$widget.vars.falling_img|cmf_get_image_url|default=''}">
                 </div>
                 <div class="anim-4" id="scorllPN">
                     <div id="scorllPNSon">
-                        <p>AD HOC DISTRIBUTED QUERIES：</p>
-                        <p>EXEC SP_CONFIGURE 'SHOW ADVANCED OPTIONS',1</p>
-                        <p>RECONFIGURE</p>
-                        <p>EXEC SP_CONFIGURE 'AD HOC DISTRIBUTED QUERIES',1</p>
-                        <p>RECONFIGURE</p>
-                        <p>USING (RUNSPACE RUNSPACE = RUNSPACEFACTORY.CREATERUNSPACE())</p>
-                        <p>{</p>
-                        <p>RUNSPACE.OPEN();</p>
-                        <p>POWERSHELL PS = POWERSHELL.CREATE();</p>
-                        <p>PS.RUNSPACE = RUNSPACE;</p>
-                        <p>STRING SHELL = STRING.FORMAT("SET-NETFIREWALLRULE –DISPLAYNAME \"ZUZHI\" -REMOTEADDRESS {0}", IP_LIST);</p>
-                        <p>PS.ADDSCRIPT(SHELL);</p>
-                        <p>PS.INVOKE();</p>
-                        <p>RUNSPACE.CLOSE();</p>
-                        <p>}</p>
+                        <php>
+                            $service = new \app\portal\service\ApiService();
+                            $page = $service->page($widget['vars']['right_text']);
+                        </php>
+                        <notempty name="$page">
+                            {$page.post_content}
+                        </notempty>
                     </div>
                 </div>
             </div>
             <div class="toNext-ico"><a href="#page2"></a></div>
         </div>
+    </widget>
 
+    <widget name="service_area">
         <div class="section page-service">
-            <!--<div class="waveWrapper waveAnimation">
-              <div class="waveWrapperInner bgTop">
-                <div class="wave waveTop" style="background-image: url('img/wave-top.png')"></div>
-              </div>
-              <div class="waveWrapperInner bgMiddle">
-                <div class="wave waveMiddle" style="background-image: url('img/wave-mid.png')"></div>
-              </div>
-              <div class="waveWrapperInner bgBottom">
-                <div class="wave waveBottom" style="background-image: url('img/wave-bot.png')"></div>
-              </div>
-            </div>-->
             <div class="service-box">
                 <div class="service-tit">
-                    <p>SCOPE OF SERVICE</p>
-                    <h2><span class="tr_display_cn tr_service">服務範圍</span></h2>
-                    <div class="tit-bottom-img"><img src="img/tit-bottom-ico.png"></div>
+                    <notempty name="$widget.vars.module_name">
+                        <php>
+                            $module_name = explode('|', $widget['vars']['module_name']);
+                        </php>
+                        <p>{$module_name.2|default=''}</p>
+                        <h2><span>{$module_name.0|default=''}</span></h2>
+                        <div class="tit-bottom-img"><img src="__TMPL__/public/assets/img/tit-bottom-ico.png"></div>
+                    <else/>
+                        <h2><span>请到后台模板管理设置模块名</span></h2>
+                    </notempty>
                 </div>
                 <div class="service-list-box clearfix" id="serviceList">
                     <ul>
+                    <notempty name="$widget.vars.service_item">
+                    <volist name="$widget.vars.service_item" id="vo">
+
                         <li>
                             <a href="javascript:;">
                                 <div class="anim-bigBox">
-                                    <div class="box-tit-cn tr_companyCompanySite">企業網站建設</div>
-                                    <div class="box-tit-en tr_display_cn">DESIGN STARTEGY</div>
-                                    <div class="box-con-img ico-1"></div>
+                                    <php>
+                                        $title_name = explode('|', $vo['title']);
+                                    </php>
+                                    <div class="box-tit-cn">{$title_name.0|default=''}</div>
+                                    <div class="box-tit-en">{$title_name.2|default=''}</div>
+                                    <div class="box-con-img {$vo.ico}"></div>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="javascript:;">
-                                <div class="anim-bigBox">
-                                    <div class="box-tit-cn tr_system">系統開發</div>
-                                    <div class="box-tit-en tr_display_cn">PRODUCT DESIGN</div>
-                                    <div class="box-con-img ico-2"></div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <div class="anim-bigBox">
-                                    <div class="box-tit-cn tr_eShop">商城建設</div>
-                                    <div class="box-tit-en tr_display_cn">BRAND IMAGE</div>
-                                    <div class="box-con-img ico-3"></div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <div class="anim-bigBox">
-                                    <div class="box-tit-cn tr_SmallProgram">小程序&amp;公眾號</div>
-                                    <div class="box-tit-en tr_display_cn">MARKETING</div>
-                                    <div class="box-con-img ico-4"></div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <div class="anim-bigBox">
-                                    <div class="box-tit-cn tr_Trailer">宣傳片</div>
-                                    <div class="box-tit-en tr_display_cn">ADVANCED R&amp;D</div>
-                                    <div class="box-con-img ico-6"></div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <div class="anim-bigBox">
-                                    <div class="box-tit-cn tr_Interface">接口定製</div>
-                                    <div class="box-tit-en tr_display_cn">ADVANCED R&amp;D</div>
-                                    <div class="box-con-img ico-7"></div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <div class="anim-bigBox">
-                                    <div class="box-tit-cn tr_ServerSecurity">服務器安全</div>
-                                    <div class="box-tit-en tr_display_cn">ADVANCED R&amp;D</div>
-                                    <div class="box-con-img ico-5"></div>
-                                </div>
-                            </a>
-                        </li>
+                    </volist>
+                    <else/>
+                        请到模板管理添加服务列表
+                    </notempty>
                     </ul>
                 </div>
             </div>
         </div>
+    </widget>
+
+    <widget name="case">
         <div class="section">
             <div class="service-box bug-earl1">
                 <div class="service-tit">
-                    <p class="">Recommended case</p>
-                    <h2><span class="tr_case tr_display_cn">推薦案例</span></h2>
-                    <div class="tit-bottom-img"><img src="img/tit-bottom-ico.png"></div>
+                    <notempty name="$widget.vars.module_name">
+                        <php>
+                            $module_name = cutting_name($widget['vars']['module_name']);
+                        </php>
+                        <p>{$module_name.2|default=''}</p>
+                        <h2><span>{$module_name.0|default=''}</span></h2>
+                        <div class="tit-bottom-img"><img src="__TMPL__/public/assets/img/tit-bottom-ico.png"></div>
+                        <else/>
+                        <h2><span>请到后台模板管理设置模块名</span></h2>
+                    </notempty>
                 </div>
                 <div class="tab-tit clearfix">
                     <ul id="tabTit">
-                        <li class="active"><p class="case-text-cn tr_display_cn">品牌形象</p><p class="case-text-en">VI</p><i></i></li>
-                        <li><p class="case-text-cn tr_display_cn">商標設計</p><p class="case-text-en">LOGO</p><i></i></li>
-                        <li><p class="case-text-cn tr_display_cn">WEB建站</p><p class="case-text-en">WEB</p><i></i></li>
-                        <li><p class="case-text-cn tr_display_cn">APP</p><p class="case-text-en">APP</p><i></i></li>
-                        <li><p class="case-text-cn tr_display_cn">小程序</p><p class="case-text-en">program</p><i></i></li>
-                        <li><p class="case-text-cn tr_display_cn">設計策略</p><p class="case-text-en">Design</p><i></i></li>
+                        <notempty name="$widget.vars.case_categories">
+                            <volist name="$widget.vars.case_categories" id="vo" length="6">
+                                <php>$category_name = cutting_name($vo['category_name']);</php>
+                                <li class="<if condition='$key eq 0'>active</if>">
+                                    <p class="case-text-cn">{$category_name.1}</p>
+                                    <p class="case-text-en">{$category_name.2}</p>
+                                    <i></i>
+                                </li>
+                            </volist>
+                        </notempty>
                     </ul>
                 </div>
                 <div id="tabCon">
@@ -158,144 +126,126 @@
                         <dd>
                             <div class="d_news_extract_thr clearfix">
                                 <ul>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/news_1.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_LightExtravagance">輕奢</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/news_2.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_LivingClub">美健邦會所</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/news_3.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_HonorablExperience">尊貴體驗</p>
-                                        </div>
-                                    </li>
+                                    <notempty name="$widget.vars.first_list">
+                                        <volist name="$widget.vars.first_list" id="vo">
+                                            <li>
+                                                <a href="{$vo.case_link|default='javascript:;'}" target="_blank">
+                                                    <div class="news_thr_picture"><img class="enlargeimg" src="{$vo.case_img|cmf_get_image_url|default=''}"></div>
+                                                    <div class="news_thr_txt">
+                                                        <php>$case_name = cutting_name($vo['case_name']);</php>
+                                                        <p class="p_1">{$case_name.0}</p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </volist>
+                                    <else/>
+                                        <h4 style="color:#333">未添加第二个分类列表</h4>
+                                    </notempty>
                                 </ul>
                             </div>
                         </dd>
                         <dd>
                             <div class="d_news_extract_thr clearfix">
                                 <ul>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/news_7.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_ebmESshop">eBm萬隆商城</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/news_8.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_LivingClub">美健邦會所</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/news_9.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_lavaux">主題旅遊</p>
-                                        </div>
-                                    </li>
+                                    <notempty name="$widget.vars.second_list">
+                                        <volist name="$widget.vars.second_list" id="vo">
+                                            <li>
+                                                <a href="{$vo.case_link|default='javascript:;'}" target="_blank">
+                                                    <div class="news_thr_picture"><img class="enlargeimg" src="{$vo.case_img|cmf_get_image_url|default=''}"></div>
+                                                    <div class="news_thr_txt">
+                                                        <php>$case_name = cutting_name($vo['case_name']);</php>
+                                                        <p class="p_1">{$case_name.0}</p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </volist>
+                                    <else/>
+                                        <h4 style="color:#333">未添加第二个分类列表</h4>
+                                    </notempty>
                                 </ul>
                             </div>
                         </dd>
                         <dd>
                             <div class="d_news_extract_thr clearfix">
                                 <ul>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/news_10.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_lgoDesign">麗歌設計</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/news_11.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_DingTaiXin">鼎泰鑫</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/news_12.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_greenSoft">綠色先鋒軟件下載</p>
-                                        </div>
-                                    </li>
+                                    <notempty name="$widget.vars.third_list">
+                                        <volist name="$widget.vars.third_list" id="vo">
+                                            <li>
+                                                <a href="{$vo.case_link|default='javascript:;'}" target="_blank">
+                                                    <div class="news_thr_picture"><img class="enlargeimg" src="{$vo.case_img|cmf_get_image_url|default=''}"></div>
+                                                    <div class="news_thr_txt">
+                                                        <php>$case_name = cutting_name($vo['case_name']);</php>
+                                                        <p class="p_1">{$case_name.0}</p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </volist>
+                                        <else/>
+                                        <h4 style="color:#333">未添加第三个分类列表</h4>
+                                    </notempty>
                                 </ul>
                             </div>
                         </dd>
                         <dd>
                             <div class="d_news_extract_thr clearfix">
                                 <ul>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/app_8.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_aiBaoEShop">艾寶商城</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/app_9.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_yiJiaBuyEShop">億佳購分銷商城</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/app_10.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_farmMarket">田園市集商城</p>
-                                        </div>
-                                    </li>
+                                    <notempty name="$widget.vars.fourth_list">
+                                        <volist name="$widget.vars.fourth_list" id="vo">
+                                            <li>
+                                                <a href="{$vo.case_link|default='javascript:;'}" target="_blank">
+                                                    <div class="news_thr_picture"><img class="enlargeimg" src="{$vo.case_img|cmf_get_image_url|default=''}"></div>
+                                                    <div class="news_thr_txt">
+                                                        <php>$case_name = cutting_name($vo['case_name']);</php>
+                                                        <p class="p_1">{$case_name.0}</p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </volist>
+                                        <else/>
+                                        <h4 style="color:#333">未添加第四个分类列表</h4>
+                                    </notempty>
                                 </ul>
                             </div>
                         </dd>
                         <dd>
                             <div class="d_news_extract_thr clearfix">
                                 <ul>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/news_13.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_ebmESshop">eBm萬隆商城</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/news_14.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_YangSen">養森商城</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/news_15.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_CarEShop">汽車</p>
-                                        </div>
-                                    </li>
+                                    <notempty name="$widget.vars.fifth_list">
+                                        <volist name="$widget.vars.fifth_list" id="vo">
+                                            <li>
+                                                <a href="{$vo.case_link|default='javascript:;'}" target="_blank">
+                                                    <div class="news_thr_picture"><img class="enlargeimg" src="{$vo.case_img|cmf_get_image_url|default=''}"></div>
+                                                    <div class="news_thr_txt">
+                                                        <php>$case_name = cutting_name($vo['case_name']);</php>
+                                                        <p class="p_1">{$case_name.0}</p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </volist>
+                                        <else/>
+                                        <h4 style="color:#333">未添加第五个分类列表</h4>
+                                    </notempty>
                                 </ul>
                             </div>
                         </dd>
                         <dd>
                             <div class="d_news_extract_thr clearfix">
                                 <ul>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/news_4.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_LivingClub">美健邦會所</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/news_5.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_LivingClub">美健邦會所</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="news_thr_picture"><img class="enlargeimg" src="img/exp_img/news_6.jpg"></div>
-                                        <div class="news_thr_txt">
-                                            <p class="p_1 tr_LivingClub">美健邦會所</p>
-                                        </div>
-                                    </li>
+                                    <notempty name="$widget.vars.six_list">
+                                        <volist name="$widget.vars.six_list" id="vo">
+                                            <li>
+                                                <a href="{$vo.case_link|default='javascript:;'}" target="_blank">
+                                                    <div class="news_thr_picture"><img class="enlargeimg" src="{$vo.case_img|cmf_get_image_url|default=''}"></div>
+                                                    <div class="news_thr_txt">
+                                                        <php>$case_name = cutting_name($vo['case_name']);</php>
+                                                        <p class="p_1">{$case_name.0}</p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </volist>
+                                        <else/>
+                                        <h4 style="color:#333">未添加第六个分类列表</h4>
+                                    </notempty>
                                 </ul>
                             </div>
                         </dd>
@@ -303,61 +253,64 @@
                 </div>
             </div>
         </div>
+    </widget>
+
+    <widget name="about_us">
         <div class="section">
             <div class="service-box bug-earl1 m-style-top">
                 <div class="service-tit">
-                    <p class="">About us</p>
-                    <h2><span class="tr_about tr_display_cn">關於以勒</span></h2>
-                    <div class="tit-bottom-img"><img src="img/tit-bottom-ico.png"></div>
+                    <notempty name="$widget.vars.module_name">
+                        <php>$module_name = cutting_name($widget['vars']['module_name']);</php>
+                        <p>{$module_name.2|default=''}</p>
+                        <h2><span>{$module_name.0|default=''}</span></h2>
+                        <div class="tit-bottom-img"><img src="__TMPL__/public/assets/img/tit-bottom-ico.png"></div>
+                        <else/>
+                        <h2><span>请到后台模板管理设置模块名</span></h2>
+                    </notempty>
                 </div>
                 <div class="summary-text">
-                    <p class="tr_aboutDet">香港以勒人才管理顧問有限公司多年來服務于香港知名集團，集成全國一線技術開發人員，打造最專業的網絡科技信息服務團隊。公司高度重視人才的引進和培養,爲人才提供良好的發展機 遇和廣闊的提升空間，由此香港公司總部還聚集了一大批經濟學家和教授、金融業名人、海外投行以及業内實戰型人才。另在各地區分公司還組建了專業營銷、研發、客戶服務團隊，結合公司文化、人力資源體系和先進組織模式，爲客戶提供安全無憂的全方位服務後盾。而公司以及集團研發團隊融合了國際、國内業界及學術界的精英，在數個重大項目上與相關部門密切合作。</p>
+                    <notempty name="$widget.vars.summary_en">
+                        <p>{$widget.vars.summary_cn}</p><!--style="font-family: bankgothic_md_bt_mediumRg;"-->
+                    </notempty>
                 </div>
                 <div class="about-list clearfix">
                     <ul>
-                        <li>
-                            <div class="about-ico about-ico1"></div>
-                            <div class="about-tit">
-                                <p class="tr_service">服務範圍</p>
-                                <i></i>
-                            </div>
-                            <div class="about-con tr_serviceDet">香港以勒人才管理顧問有限公司主要經營項目設計+網站開發+程序開發爲一體的IT商業模式，爲各種企業、商家、等大小項目進行互聯網端的開發與設計。</div>
-                        </li>
-                        <li>
-                            <div class="about-ico about-ico3"></div>
-                            <div class="about-tit">
-                                <p class="tr_brandIdea">品牌理念</p>
-                                <i></i>
-                            </div>
-                            <div class="about-con tr_brandIdeaDet">堅持“誠信經營、客戶第一、專業創新”的經營方針，秉承“用心服務客戶,認真赢得信賴”的服務理念，通過信基網絡科技公司先進的IT技術和服務，爲全國客戶提供更加安全、快捷、優質的服務。</div>
-                        </li>
-                        <li>
-                            <div class="about-ico about-ico4"></div>
-                            <div class="about-tit">
-                                <p class="tr_tech">技術團隊</p>
-                                <i></i>
-                            </div>
-                            <div class="about-con tr_techDet">爲客戶提供專業、耐心、高端的技術服務，從項目的設計到開發，一條龍服務，在互聯網新科技的崛起時代中，争取爲客戶提供最優質與專業的技術服務，爲客戶打造更加完美專業與優質的技術服務。</div>
-                        </li>
-                        <li>
-                            <div class="about-ico about-ico2"></div>
-                            <div class="about-tit">
-                                <p class="tr_ToCustomers">緻客戶：</p>
-                                <i></i>
-                            </div>
-                            <div class="about-con tr_ToCustomersDet">感激在的發展道路上得到您的支持，感謝您的信任與托付，感動在發展的關鍵時刻得到您的傾力相助，感恩與您一起共同努力，開拓市場。
-                                ——電器、服飾、互聯網、金融、美妝、汽車、食品保健等一路相伴的客戶</div>
-                        </li>
+                        <notempty name="$widget.vars.about_list">
+                            <volist name="$widget.vars.about_list" id="vo">
+                                <li>
+                                    <div class="about-ico {$vo.item_ico}"></div>
+                                    <div class="about-tit">
+                                        <php>$item_name = cutting_name($vo['item_name']);</php>
+                                        <p>{$item_name.0|default=''}</p>
+                                        <i></i>
+                                    </div>
+                                    <div class="about-con">{$vo.description_cn|default=''}</div>
+                                </li>
+                            </volist>
+                        <else/>
+                            <h2 style="color:#333">未添加关于以勒列表</h2>
+                        </notempty>
                     </ul>
                 </div>
             </div>
         </div>
+    </widget>
+
+    <widget name="company_news">
         <div class="section home-news-box">
             <div class="service-box bug-earl1">
                 <div class="service-tit">
+                    <notempty name="$widget.vars.module_name">
+                        <php>$module_name = cutting_name($widget['vars']['module_name']);</php>
+                        <p>{$module_name.2|default=''}</p>
+                        <h2><span>{$module_name.0|default=''}</span></h2>
+                        <div class="tit-bottom-img"><img src="__TMPL__/public/assets/img/tit-bottom-ico.png"></div>
+                        <else/>
+                        <h2><span>请到后台模板管理设置模块名</span></h2>
+                    </notempty>
                     <p class="">COMPANY NEWS</p>
                     <h2><span class="tr_news tr_display_cn">公司動态</span></h2>
-                    <div class="tit-bottom-img"><img src="img/tit-bottom-ico.png"></div>
+                    <div class="tit-bottom-img"><img src="__TMPL__/public/assets/img/tit-bottom-ico.png"></div>
                 </div>
             </div>
             <div class="ry-main-con ry-main-case-con">
@@ -510,6 +463,7 @@
             </div>
 
         </div>
+    </widget>
         <div class="section it-team-box" style="color: #565656;">
             <div class="service-box bug-earl2">
                 <div class="service-tit">

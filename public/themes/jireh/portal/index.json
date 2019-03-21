@@ -1,0 +1,340 @@
+{
+  "name": "首页模板信息",
+  "action": "public/index",
+  "description": "包含首页，服务范围，推荐案例，关于以勒，以勒动态，技术团队信息设置",
+  "order": "1.0.1",
+  "more": {
+    "widgets": {
+      "home": {
+        "title": "首页信息",
+        "display": "1",
+        "vars": {
+          "loading_img": {
+            "title": "加载图片",
+            "value": "",
+            "type": "image",
+            "tip": "加载时显示的图片，建议底色为白色（.jpg）或透明（.png）"
+          },
+          "falling_img": {
+            "title": "下坠图片",
+            "value": "",
+            "type": "image",
+            "tip": "下坠显示的图片，建议底色为白色（.jpg）或透明（.png）"
+          },
+          "centered_img": {
+            "title": "中心图片",
+            "value": "",
+            "type": "image",
+            "tip": "中心显示的图片，建议底色为白色（.jpg）或透明（.png）"
+          },
+          "left_text": {
+            "title": "左侧动画文字",
+            "value": "",
+            "type": "text",
+            "tip": "文字最多显示三段，用\"|\"分开，如：第一段文字|第二段文字|第三段文字"
+          },
+          "right_text": {
+            "title": "右侧动画文字",
+            "value": "",
+            "type": "text",
+            "dataSource": {
+              "api": "portal/Page/index",
+              "multi": false
+            },
+            "tip": "请选择右侧动画文字的单页文章"
+          }
+        }
+      },
+      "service_area": {
+        "title": "服务范围信息",
+        "display": "1",
+        "vars": {
+          "module_name": {
+            "title": "模块名称",
+            "value": "",
+            "type": "text",
+            "tip": "服务范围模块名，简繁英请用\"|\"分开，如：简体名称|繁体名称|英文名称"
+          },
+          "service_item": {
+            "title": "服务列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "title": {
+                "title": "列表标题",
+                "value": "",
+                "type": "text",
+                "tip": "服务列表标题，简繁英请用\"|\"分开，如：简体名称|繁体名称|英文名称"
+              },
+              "ico": {
+                "title": "列表图标 CSS 类名",
+                "value": "",
+                "type": "text",
+                "tip": "对应前端图标 CSS 类名"
+              }
+            },
+            "tip": "服务列表建议只添加7个"
+          }
+        }
+      },
+      "case": {
+        "title": "推荐案例信息",
+        "display": "1",
+        "vars": {
+          "module_name": {
+            "title": "模块名称",
+            "value": "",
+            "type": "text",
+            "tip": "推荐案例模块名，简繁英请用\"|\"分开，如：简体名称|繁体名称|英文名称"
+          },
+          "case_categories": {
+            "title": "推荐案例分类",
+            "value": [],
+            "type": "array",
+            "item": {
+              "category_name": {
+                "title": "分类名",
+                "value": "",
+                "type": "text",
+                "tip": "简繁英请用 \"|\" 隔开,如：简体名称|繁体名称|英文名称"
+              }
+            },
+            "tip": "只显示 6 个,需显示超过 7 个请联系技术人员修改"
+          },
+          "first_list": {
+            "title": "第一个分类案例列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "case_name": {
+                "title": "案例名称",
+                "value": "",
+                "type": "text",
+                "tip": "简繁英请用 \"|\" 隔开,如：简体名称|繁体名称|英文名称"
+              },
+              "case_img": {
+                "title": "案例图片",
+                "value": "",
+                "type": "image",
+                "tip": "案例的缩图"
+              },
+              "case_link": {
+                "title": "案例链接",
+                "value": "",
+                "type": "text",
+                "tip": "案例跳转的网络链接"
+              },
+              "tip": "分类列表只显示3条"
+            }
+          },
+          "second_list": {
+            "title": "第二个分类案例列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "case_name": {
+                "title": "案例名称",
+                "value": "",
+                "type": "text",
+                "tip": "简繁英请用 \"|\" 隔开,如：简体名称|繁体名称|英文名称"
+              },
+              "case_img": {
+                "title": "案例图片",
+                "value": "",
+                "type": "image",
+                "tip": "案例的缩图"
+              },
+              "case_link": {
+                "title": "案例链接",
+                "value": "",
+                "type": "text",
+                "tip": "案例跳转的网络链接"
+              }
+            },
+            "tip": "分类列表只显示3条"
+          },
+          "third_list": {
+            "title": "第三个分类案例列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "case_name": {
+                "title": "案例名称",
+                "value": "",
+                "type": "text",
+                "tip": "简繁英请用 \"|\" 隔开,如：简体名称|繁体名称|英文名称"
+              },
+              "case_img": {
+                "title": "案例图片",
+                "value": "",
+                "type": "image",
+                "tip": "案例的缩图"
+              },
+              "case_link": {
+                "title": "案例链接",
+                "value": "",
+                "type": "text",
+                "tip": "案例跳转的网络链接"
+              }
+            },
+            "tip": "分类列表只显示3条"
+          },
+          "fourth_list": {
+            "title": "第四个分类案例列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "case_name": {
+                "title": "案例名称",
+                "value": "",
+                "type": "text",
+                "tip": "简繁英请用 \"|\" 隔开,如：简体名称|繁体名称|英文名称"
+              },
+              "case_img": {
+                "title": "案例图片",
+                "value": "",
+                "type": "image",
+                "tip": "案例的缩图"
+              },
+              "case_link": {
+                "title": "案例链接",
+                "value": "",
+                "type": "text",
+                "tip": "案例跳转的网络链接"
+              }
+            },
+            "tip": "分类列表只显示3条"
+          },
+          "fifth_list": {
+            "title": "第五个分类案例列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "case_name": {
+                "title": "案例名称",
+                "value": "",
+                "type": "text",
+                "tip": "简繁英请用 \"|\" 隔开,如：简体名称|繁体名称|英文名称"
+              },
+              "case_img": {
+                "title": "案例图片",
+                "value": "",
+                "type": "image",
+                "tip": "案例的缩图"
+              },
+              "case_link": {
+                "title": "案例链接",
+                "value": "",
+                "type": "text",
+                "tip": "案例跳转的网络链接"
+              }
+            },
+            "tip": "分类列表只显示3条"
+          },
+          "six_list": {
+            "title": "第六个分类案例列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "case_name": {
+                "title": "案例名称",
+                "value": "",
+                "type": "text",
+                "tip": "简繁英请用 \"|\" 隔开,如：简体名称|繁体名称|英文名称"
+              },
+              "case_img": {
+                "title": "案例图片",
+                "value": "",
+                "type": "image",
+                "tip": "案例的缩图"
+              },
+              "case_link": {
+                "title": "案例链接",
+                "value": "",
+                "type": "text",
+                "tip": "案例跳转的网络链接"
+              }
+            },
+            "tip": "分类列表只显示3条"
+          }
+        }
+      },
+      "about_us": {
+        "title": "关于以勒",
+        "display": "1",
+        "vars": {
+          "module_name": {
+            "title": "模块名称",
+            "value": "",
+            "type": "text",
+            "tip": "关于以勒模块名称，简繁英请用\"|\"分开，如：简体名称|繁体名称|英文名称"
+          },
+          "summary_cn": {
+            "title": "关于以勒简体摘要",
+            "value": "",
+            "type": "textarea",
+            "tip": "关于以勒简体摘要"
+          },
+          "summary_hk": {
+            "title": "关于以勒繁体摘要",
+            "value": "",
+            "type": "textarea",
+            "tip": "关于以勒繁体摘要"
+          },
+          "summary_en": {
+            "title": "关于以勒英文摘要",
+            "value": "",
+            "type": "textarea",
+            "tip": "关于以勒英文摘要"
+          },
+          "about_list": {
+            "title": "关于以勒列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "item_name": {
+                "title": "标题",
+                "value": "",
+                "type": "text",
+                "tip": "标题名称，简繁英请用\"|\"分开，如：简体名称|繁体名称|英文名称"
+              },
+              "item_ico": {
+                "title": "CSS 图标名称",
+                "value": "",
+                "type": "text"
+              },
+              "description_cn": {
+                "title": "简体描述",
+                "value": "",
+                "type": "textarea"
+              },
+              "description_hk": {
+                "title": "繁体描述",
+                "value": "",
+                "type": "textarea"
+              },
+              "description_en": {
+                "title": "英文描述",
+                "value": "",
+                "type": "textarea"
+              }
+            },
+            "tip": "最多显示四条"
+          }
+        }
+      },
+      "company_news": {
+        "title": "公司动态",
+        "display": "1",
+        "vars": {
+          "module_name": {
+            "title": "模块名称",
+            "value": "",
+            "type": "text",
+            "tip": "以勒动态模块名称，简繁英请用\"|\"分开，如：简体名称|繁体名称|英文名称"
+          }
+        }
+      }
+    }
+  }
+}

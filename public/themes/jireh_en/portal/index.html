@@ -1,0 +1,387 @@
+<extend name="public@base" />
+
+<block name="head">
+    {__block__}
+    <link rel="stylesheet" type="text/css" href="__TMPL__/public/assets/css/fullPage-2.4.6.css">
+</block>
+
+<block name="body">
+    <div id="dowebok">
+        <widget name="home">
+            <div class="section page-banner">
+                <div id="loadingIco">
+                    <div class="logo-img">
+                        <div class="m-xz8 xzleft"></div>
+                        <img src="{$widget.vars.loading_img|cmf_get_image_url|default=''}" />
+                        <div class="m-xz9"></div>
+                    </div>
+                    <div class="loading-soild"><div class="loading-soild-bg" id="progressChild"></div></div>
+                    <div id="loadingText"></div>
+                </div>
+                <img src="__TMPL__/public/assets/img/banner-bg.png" class="page-banner-img">
+                <div id="bannerMask"></div>
+                <div class="banner-text">
+                    <div class="anim-text-box">
+                        <notempty name="$widget.vars.left_text">
+                            <php>
+                                $text = explode('|', $widget['vars']['left_text']);
+                            </php>
+                            <p class="anim-2" style="font-family: bankgothic_md_bt_mediumRg;">{$text.0|default=''}</p>
+                            <p class="anim-1" style="font-family: bankgothic_md_bt_mediumRg;">{$text.1|default=''}</p>
+                            <p class="anim-3" style="font-family: bankgothic_md_bt_mediumRg;">{$text.2|default=''}</p>
+                            <else/>
+                            <p class="anim-2" style="font-family: bankgothic_md_bt_mediumRg;">The left animation text is not set, please go to the template management settings.</p>
+                        </notempty>
+                    </div>
+                    <div class="anim-5">
+                        <img src="{$widget.vars.centered_img|cmf_get_image_url|default=''}">
+                    </div>
+                    <div class="anim-6">
+                        <img src="{$widget.vars.falling_img|cmf_get_image_url|default=''}">
+                    </div>
+                    <div class="anim-4" id="scorllPN">
+                        <div id="scorllPNSon">
+                            <php>
+                                $service = new \app\portal\service\ApiService();
+                                $page = $service->page($widget['vars']['right_text']);
+                            </php>
+                            <notempty name="$page">
+                                {$page.post_content}
+                            </notempty>
+                        </div>
+                    </div>
+                </div>
+                <div class="toNext-ico"><a href="#page2"></a></div>
+            </div>
+        </widget>
+
+        <widget name="service_area">
+            <div class="section page-service">
+                <div class="service-box">
+                    <div class="service-tit">
+                        <notempty name="$widget.vars.module_name">
+                            <php>
+                                $module_name = explode('|', $widget['vars']['module_name']);
+                            </php>
+                            <p>{$module_name.2|default=''}</p>
+                            <div class="tit-bottom-img"><img src="__TMPL__/public/assets/img/tit-bottom-ico.png"></div>
+                            <else/>
+                            <h2><span style="font-family: bankgothic_md_bt_mediumRg;">Please go to the background template management to set the module name.</span></h2>
+                        </notempty>
+                    </div>
+                    <div class="service-list-box clearfix" id="serviceList">
+                        <ul>
+                            <notempty name="$widget.vars.service_item">
+                                <volist name="$widget.vars.service_item" id="vo">
+                                    <li>
+                                        <a href="javascript:;">
+                                            <div class="anim-bigBox">
+                                                <php>
+                                                    $title_name = explode('|', $vo['title']);
+                                                </php>
+                                                <div class="box-tit-cn" style="font-family: bankgothic_md_bt_mediumRg; height: 40px; padding-left: 10px; padding-right: 10px;">{$title_name.2|default=''}</div>
+                                                <div class="box-con-img {$vo.ico}"></div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </volist>
+                            <else/>
+                                <span style="font-family: bankgothic_md_bt_mediumRg;">Please go to the template management to add a list of services</span>
+                            </notempty>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </widget>
+
+        <widget name="case">
+            <div class="section">
+                <div class="service-box bug-earl1">
+                    <div class="service-tit">
+                        <notempty name="$widget.vars.module_name">
+                            <php>
+                                $module_name = cutting_name($widget['vars']['module_name']);
+                            </php>
+                            <p style="font-family: bankgothic_md_bt_mediumRg;">{$module_name.2|default=''}</p>
+                            <div class="tit-bottom-img"><img src="__TMPL__/public/assets/img/tit-bottom-ico.png"></div>
+                            <else/>
+                            <h2><span style="font-family: bankgothic_md_bt_mediumRg;">Please go to the background template management to set the module name.</span></h2>
+                        </notempty>
+                    </div>
+                    <div class="tab-tit clearfix">
+                        <ul id="tabTit">
+                            <notempty name="$widget.vars.case_categories">
+                                <volist name="$widget.vars.case_categories" id="vo" length="6">
+                                    <php>$category_name = cutting_name($vo['category_name']);</php>
+                                    <li class="<if condition='$key eq 0'>active</if>">
+                                        <p class="case-text-en" style="font-family: bankgothic_md_bt_mediumRg;">{$category_name.2}</p>
+                                        <i></i>
+                                    </li>
+                                </volist>
+                            </notempty>
+                        </ul>
+                    </div>
+                    <div id="tabCon">
+                        <dl>
+                            <dd>
+                                <div class="d_news_extract_thr clearfix">
+                                    <ul>
+                                        <notempty name="$widget.vars.first_list">
+                                            <volist name="$widget.vars.first_list" id="vo">
+                                                <li>
+                                                    <a href="{$vo.case_link|default='javascript:;'}" target="_blank">
+                                                        <div class="news_thr_picture"><img class="enlargeimg" src="{$vo.case_img|cmf_get_image_url|default=''}"></div>
+                                                        <div class="news_thr_txt">
+                                                            <p class="p_1" style="font-family: bankgothic_md_bt_mediumRg;">{$vo.case_name}</p>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </volist>
+                                        </notempty>
+                                    </ul>
+                                </div>
+                            </dd>
+                            <dd>
+                                <div class="d_news_extract_thr clearfix">
+                                    <ul>
+                                        <notempty name="$widget.vars.second_list">
+                                            <volist name="$widget.vars.second_list" id="vo">
+                                                <li>
+                                                    <a href="{$vo.case_link|default='javascript:;'}" target="_blank">
+                                                        <div class="news_thr_picture"><img class="enlargeimg" src="{$vo.case_img|cmf_get_image_url|default=''}"></div>
+                                                        <div class="news_thr_txt">
+                                                            <p class="p_1" style="font-family: bankgothic_md_bt_mediumRg;">{$vo.case_name}</p>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </volist>
+                                        </notempty>
+                                    </ul>
+                                </div>
+                            </dd>
+                            <dd>
+                                <div class="d_news_extract_thr clearfix">
+                                    <ul>
+                                        <notempty name="$widget.vars.third_list">
+                                            <volist name="$widget.vars.third_list" id="vo">
+                                                <li>
+                                                    <a href="{$vo.case_link|default='javascript:;'}" target="_blank">
+                                                        <div class="news_thr_picture"><img class="enlargeimg" src="{$vo.case_img|cmf_get_image_url|default=''}"></div>
+                                                        <div class="news_thr_txt">
+                                                            <p class="p_1" style="font-family: bankgothic_md_bt_mediumRg;">{$vo.case_name}</p>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </volist>
+                                        </notempty>
+                                    </ul>
+                                </div>
+                            </dd>
+                            <dd>
+                                <div class="d_news_extract_thr clearfix">
+                                    <ul>
+                                        <notempty name="$widget.vars.fourth_list">
+                                            <volist name="$widget.vars.fourth_list" id="vo">
+                                                <li>
+                                                    <a href="{$vo.case_link|default='javascript:;'}" target="_blank">
+                                                        <div class="news_thr_picture"><img class="enlargeimg" src="{$vo.case_img|cmf_get_image_url|default=''}"></div>
+                                                        <div class="news_thr_txt">
+                                                            <p class="p_1" style="font-family: bankgothic_md_bt_mediumRg;">{$vo.case_name}</p>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </volist>
+                                        </notempty>
+                                    </ul>
+                                </div>
+                            </dd>
+                            <dd>
+                                <div class="d_news_extract_thr clearfix">
+                                    <ul>
+                                        <notempty name="$widget.vars.fifth_list">
+                                            <volist name="$widget.vars.fifth_list" id="vo">
+                                                <li>
+                                                    <a href="{$vo.case_link|default='javascript:;'}" target="_blank">
+                                                        <div class="news_thr_picture"><img class="enlargeimg" src="{$vo.case_img|cmf_get_image_url|default=''}"></div>
+                                                        <div class="news_thr_txt">
+                                                            <p class="p_1" style="font-family: bankgothic_md_bt_mediumRg;">{$vo.case_name}</p>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </volist>
+                                        </notempty>
+                                    </ul>
+                                </div>
+                            </dd>
+                            <dd>
+                                <div class="d_news_extract_thr clearfix">
+                                    <ul>
+                                        <notempty name="$widget.vars.six_list">
+                                            <volist name="$widget.vars.six_list" id="vo">
+                                                <li>
+                                                    <a href="{$vo.case_link|default='javascript:;'}" target="_blank">
+                                                        <div class="news_thr_picture"><img class="enlargeimg" src="{$vo.case_img|cmf_get_image_url|default=''}"></div>
+                                                        <div class="news_thr_txt">
+                                                            <p class="p_1" style="font-family: bankgothic_md_bt_mediumRg;">{$vo.case_name}</p>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </volist>
+                                        </notempty>
+                                    </ul>
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </widget>
+
+        <widget name="about_us">
+            <div class="section">
+                <div class="service-box bug-earl1 m-style-top">
+                    <div class="service-tit">
+                        <notempty name="$widget.vars.module_name">
+                            <php>$module_name = cutting_name($widget['vars']['module_name']);</php>
+                            <p style="font-family: bankgothic_md_bt_mediumRg;">{$module_name.2|default=''}</p>
+                            <div class="tit-bottom-img"><img src="__TMPL__/public/assets/img/tit-bottom-ico.png"></div>
+                            <else/>
+                            <h2><span style="font-family: bankgothic_md_bt_mediumRg;">Please go to the background template management to set the module name.</span></h2>
+                        </notempty>
+                    </div>
+                    <div class="summary-text">
+                        <p style="font-family: bankgothic_md_bt_mediumRg;">{$widget.vars.summary|default=''}</p><!--style="font-family: bankgothic_md_bt_mediumRg;"-->
+                    </div>
+                    <div class="about-list clearfix">
+                        <ul>
+                            <notempty name="$widget.vars.about_list">
+                                <volist name="$widget.vars.about_list" id="vo" length="4">
+                                    <li>
+                                        <div class="about-ico {$vo.item_ico}"></div>
+                                        <div class="about-tit">
+                                            <p style="font-family: bankgothic_md_bt_mediumRg;">{$vo.item_name|default=''}</p>
+                                            <i></i>
+                                        </div>
+                                        <div class="about-con" style="font-family: bankgothic_md_bt_mediumRg;">{$vo.description|default=''}</div>
+                                    </li>
+                                </volist>
+                                <else/>
+                                <h2 style="font-family: bankgothic_md_bt_mediumRg;color:#333;">No list added to about Jireh</h2>
+                            </notempty>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </widget>
+
+        <widget name="company_news">
+            <div class="section home-news-box">
+                <div class="service-box bug-earl1">
+                    <div class="service-tit">
+                        <notempty name="$widget.vars.module_name">
+                            <php>$module_name = cutting_name($widget['vars']['module_name']);</php>
+                            <p style="font-family: bankgothic_md_bt_mediumRg;">{$module_name.2|default=''}</p>
+                            <div class="tit-bottom-img"><img src="__TMPL__/public/assets/img/tit-bottom-ico.png"></div>
+                            <else/>
+                            <h2><span style="font-family: bankgothic_md_bt_mediumRg;">Please go to the background template management to set the module name.</span></h2>
+                        </notempty>
+                    </div>
+                </div>
+                <div class="ry-main-con ry-main-case-con">
+                    <div class="ry-main-content">
+                        <notempty name="$widget.vars.news">
+                            <div class="ry-news-right">
+                                <div class="ry-news-year js-ry-news-year">
+                                    <php>
+                                        $orderTime = [];
+                                        foreach($widget['vars']['news'] as $k => $v){
+                                        $year = date('Y', strtotime($v['created_time']));
+                                        if(!in_array($year, $orderTime)) {
+                                        array_push($orderTime, $year);
+                                        }
+                                        }
+                                        arsort($orderTime);
+                                        $count = count($orderTime);
+                                    </php>
+                                    <notempty name="orderTime">
+                                        <volist name="orderTime" id="vo" length="$count">
+                                            <dl class="<if condition='$key eq 0'>action</if> linear-100ms">{$vo}</dl>
+                                        </volist>
+                                    </notempty>
+                                </div>
+                                <volist name="$orderTime" id="orderYear" key="orederKey" length="$count">
+                                    <div class="ry-news-box <if condition='$orederKey eq 1'>active</if>">
+                                        <php>
+                                            $newsCreatedTime = array_column($widget['vars']['news'],'created_time');
+                                            array_multisort($newsCreatedTime,SORT_DESC,$widget['vars']['news']);//SORT_DESC为降序，SORT_ASC为升序
+                                        </php>
+                                        <volist name="$widget.vars.news" id="new" key="newKey">
+                                            <php>
+                                                $created_time = strtotime($new['created_time']);
+                                                $newYear =date('Y',strtotime($new['created_time']));
+                                            </php>
+                                            <if condition="$newYear eq $orderYear">
+                                                <div class="ry-nb-list"><!--ry-nb-list-first-->
+                                                    <div class="ry-nbl-date">
+                                                        <div class="ry-nbl-month">{$created_time|date='m', ###}</div>
+                                                        <div class="ry-nbl-day">{$created_time|date='d', ###}</div>
+                                                    </div>
+                                                    <a href="javascript:;" class="ry-nbl-msg">
+                                                        <div class="ry-nbl-tit ease-in-200ms" style="font-family: bankgothic_md_bt_mediumRg;">{$new.title|default=''}</div>
+                                                        <div class="ry-nbl-txt linear-200ms" style="font-family: bankgothic_md_bt_mediumRg;">{$new.content|default=''}</div>
+                                                    </a>
+                                                </div>
+                                            </if>
+                                        </volist>
+                                    </div>
+                                </volist>
+                            </div>
+                            <else/>
+                            <h2 style="text-align: center;color:#333;font-family: bankgothic_md_bt_mediumRg;">No company dynamic list added</h2>
+                        </notempty>
+                    </div>
+                </div>
+            </div>
+        </widget>
+
+        <widget name="team">
+            <div class="section it-team-box" style="color: #565656;">
+                <div class="service-box bug-earl2" style="top: 100px;">
+                    <div class="service-tit">
+                        <notempty name="$widget.vars.module_name">
+                            <php>$module_name = cutting_name($widget['vars']['module_name']);</php>
+                            <p>{$module_name.2|default=''}</p>
+                            <div class="tit-bottom-img"><img src="__TMPL__/public/assets/img/tit-bottom-ico.png"></div>
+                            <else/>
+                            <h2><span style="font-family: bankgothic_md_bt_mediumRg;">Please go to the background template management to set the module name.</span></h2>
+                        </notempty>
+                    </div>
+                </div>
+
+                <notempty name="$widget.vars.slide">
+                    <slides id="1">
+                        <div class="slide">
+                            <div class="slide-sign clearfix" style="padding-top: 130px;">
+                                <div class="slide-sign-left">
+                                    <php>
+                                        $title_name = cutting_name($vo['title']);
+                                        $description = cutting_name($vo['description']);
+                                    </php>
+                                    <h3 style="font-family: bankgothic_md_bt_mediumRg;">{$title_name.2|default=''}</h3>
+                                    <p style="font-family: bankgothic_md_bt_mediumRg;">{$description.2|default=''}</p>
+                                </div>
+                                <div class="slide-sign-right">
+                                    <img src="{$vo.image|cmf_get_image_url|default=''}">
+                                </div>
+                            </div>
+                        </div>
+                    </slides>
+                    <else/>
+                    <div class="slide"><div class="slide-sign clearfix"><h4 style="color: #333333;font-family: bankgothic_md_bt_mediumRg;">Technical team slides not set</h4></div></div>
+                </notempty>
+            </div>
+        </widget>
+
+        <include file="public@footer"/>
+    </div>
+</block>

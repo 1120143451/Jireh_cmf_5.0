@@ -1,0 +1,32 @@
+<div class="web-nav" id="menu">
+    <div class="site-top-menu">
+        <div class="site-logo">
+            <a href="__ROOT__">
+                <img src="{$theme_vars.logo|cmf_get_image_url|default=''}">
+            </a>
+        </div>
+        <div class="head-nav-box">
+            <div id="pageMask"></div>
+            <div id="headNavBtn"><span class="tr_menuNav">navigation</span></div>
+            <notempty name="$theme_vars.nav_id">
+                <navigation nav-id="$theme_vars.nav_id" root="ul" class="head-list-nav">
+                    <navigationMenu root="">
+                        <li data-menuanchor="page{$menu.id}">
+                            <a href="{$menu.href|default=''}" target="{$menu.target|default=''}">
+                                <span style="font-family: bankgothic_md_bt_mediumRg;">{$menu.name|default=''}</span><em></em>
+                            </a>
+                        </li>
+                    </navigationMenu>
+                </navigation>
+            <else/>
+                <ul style="font-family: bankgothic_md_bt_mediumRg;">No navigation is set, please go to the background template management settings.</ul>
+            </notempty>
+
+        </div>
+        <div class="tab-font">
+            <a href="/?lang=zh-cn" onclick="langTab(0)" class="zh_click">简</a>
+            <a href="/?lang=zh-hk" onclick="langTab(1)" class="zh_click">繁</a>
+            <a href="/?lang=en-us" onclick="langTab(2)" class="zh_click">EN</a>
+        </div>
+    </div>
+</div>

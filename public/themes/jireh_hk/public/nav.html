@@ -1,0 +1,32 @@
+<div class="web-nav" id="menu">
+    <div class="site-top-menu">
+        <div class="site-logo">
+            <a href="__ROOT__">
+                <img src="{$theme_vars.logo|cmf_get_image_url|default=''}">
+            </a>
+        </div>
+        <div class="head-nav-box">
+            <div id="pageMask"></div>
+            <div id="headNavBtn">導航</div>
+            <notempty name="$theme_vars.nav_id">
+                <navigation nav-id="$theme_vars.nav_id" root="ul" class="head-list-nav">
+                    <navigationMenu root="">
+                        <li data-menuanchor="page{$menu.id}">
+                            <a href="{$menu.href|default=''}" target="{$menu.target|default=''}">
+                                {$menu.name|default=''}<em></em>
+                            </a>
+                        </li>
+                    </navigationMenu>
+                </navigation>
+            <else/>
+                <ul>未設置導航，請轉到後台模板管理設置。</ul>
+            </notempty>
+
+        </div>
+        <div class="tab-font">
+            <a href="/?lang=zh-cn" onclick="langTab(0)" class="zh_click">简</a>
+            <a href="/?lang=zh-hk" onclick="langTab(1)" class="zh_click">繁</a>
+            <a href="/?lang=en-us" onclick="langTab(2)" class="zh_click">EN</a>
+        </div>
+    </div>
+</div>

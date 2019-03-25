@@ -1,0 +1,65 @@
+<extend name="public@base" />
+<block name="title">招賢納才 - </block>
+<block name="body">
+    <!-- route S -->
+    <div class="d_com_route_container">
+        <div class="d_com_route">
+            <span class="d_left route_link">
+                <a href="__ROOT__/" class="tr_index">首頁</a><i></i>
+                <a href="{:url('portal/job/index')}" class="selected">招賢納才</a>
+            </span>
+        </div>
+    </div>
+    <!-- route E -->
+<widget name="job">
+    <div class="d_service_con_container clearfix">
+        <notempty name="widget.vars.category_id">
+            <div class="d_service_content clearfix mt_70">
+                <div id="leftNavIco" class="tr_menuNav">導航</div>
+                <div class="d_service_nav d_left">
+                    <h3 class="nav_h3_tit">招賢納才</h3>
+                    <div id="pane2" class="sloid_web">
+                        <ul id="ul" class="hid_nav">
+                            <portal:allSubCategories categoryId="$widget.vars.category_id" item="vo">
+                                <li><a href="javascript:;" class="<if condition='$key eq 0'>selected</if>"><i></i>{$vo.name|default=''}</a></li>
+                            </portal:allSubCategories>
+                        </ul>
+                    </div>
+                </div>
+                <div id="dllist" class="d_company_about_con d_right">
+                    <!--floor-->
+                    <portal:allSubCategories categoryId="$widget.vars.category_id" item="svo">
+                            <div class="d_company_about_con floor_{$key} mb_60 <if condition='$key eq 0'>active</if>">
+                                <!--调取内容-->
+                                <portal:articles limit="1" order="post.published_time DESC" categoryIds="$svo['id']">
+                                <div class="d_com_sv_container">
+                                    <div class="d_com_sv_tit_cn_en">
+                                        <div class="m_menu_show2"><a href="javascript:;" class="btn-slide2 active2"></a></div>
+                                        <div class="con_encn_partition"></div>
+                                        <div class="d_com_sv_tit_cn" style="text-align: left;">{$vo.post_title|default=''}</div>
+                                    </div>
+                                </div>
+                                <div class="d_comsv_text_description">{$vo.post_content|default=''}</div>
+                                </portal:articles>
+                                <!--调取内容-->
+                            </div>
+                    </portal:allSubCategories>
+                    <!--floor-->
+                </div>
+            </div>
+
+        <else />
+            <h2 style="text-align: center;">未设置招纳贤才分类</h2>
+        </notempty>
+    </div>
+</widget>
+
+    <include file="public@footer"/>
+</block>
+<block name="scripts">
+    <script>
+        leftMenu('pane2','d_service_con_container','jobTabIndex');
+        pageNav('headNavBtn','head-list-nav');
+        pageNav('leftNavIco','d_service_nav');
+    </script>
+</block>

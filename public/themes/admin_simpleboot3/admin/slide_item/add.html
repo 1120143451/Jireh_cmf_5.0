@@ -15,7 +15,9 @@
                         <td>
                             <input class="form-control" type="text" style="width:400px;" name="post[title]" id="title"
                                    required value="" placeholder="请输入标题"/>
+                            <span style="color: red;">简繁英请用 | 分隔，如：简体标题|繁体标题|英文标题</span>
                         </td>
+
                     </tr>
                     <tr>
                         <th>链接</th>
@@ -26,8 +28,11 @@
                     </tr>
                     <tr>
                         <th>描述</th>
-                        <td><input class="form-control" type="text" name="post[description]" id="source" value=""
-                                   style="width: 400px" placeholder="请输入描述"></td>
+                        <td>
+                            <input class="form-control" type="text" name="post[description]" id="source" value=""
+                                   style="width: 400px" placeholder="请输入描述">
+                            <span style="color: red;">简繁英请用 | 分隔，如：简体描述|繁体描述|英文描述</span>
+                        </td>
                     </tr>
                     <tr>
                         <th>幻灯片内容</th>

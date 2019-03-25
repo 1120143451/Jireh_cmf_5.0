@@ -1,0 +1,58 @@
+<extend name="public@base"/>
+<block name="title">联系我们 - </block>
+<block name="body">
+    <!-- route S -->
+    <div class="d_com_route_container">
+        <div class="d_com_route">
+            <span class="d_left route_link">
+                <a href="__ROOT__/">首页</a><i></i><a href="contact.html" class="selected">联系我们</a>
+            </span>
+        </div>
+    </div>
+    <!-- route E -->
+
+    <div class="d_contact_con_container">
+        <div class="d_contact_content">
+            <div class="d_com_contact_tit_cn_en mt_70">
+                <php>
+                    $contactAsTitle = cutting_name($theme_vars['contact_us_title']);
+                    $province = cutting_name($theme_vars['province']);
+                    $city = cutting_name($theme_vars['city']);
+                    $region = cutting_name($theme_vars['region']);
+                    $street = cutting_name($theme_vars['street']);
+                </php>
+                <div class="d_com_contact_tit_en">{$contactAsTitle.2|default=''}</div>
+                <div class="con_encn_partition"></div>
+                <div class="d_com_contact_tit_cn">{$contactAsTitle.0|default=''}</div>
+            </div>
+
+            <div class="contact_thr_box clearfix mt_60">
+                <ul class="clearfix">
+                    <li class="d_com_contact_address">
+                        <i></i>
+                        <span>
+                            {$province.0|default=''}{$city.0|default=''}{$region.0|default=''}
+                            <br>
+                            {$street.0|default=''}
+                        </span>
+                    </li>
+                    <li class="d_com_contact_email"><i></i><span>{$theme_vars.email|default=''}</span></li>
+                    <li class="d_com_contact_tel"><i></i><span>+{$theme_vars.phone|default=''}</span></li>
+                </ul>
+            </div>
+
+            <div class="d_com_contact_map_box mt_70">
+                <div class="d_com_contact_map_box mt_70">
+                    <notempty name="$theme_vars.map_img">
+                        <img src="{$theme_vars.map_img|cmf_get_image_url}">
+                    <else/>
+                        <h4 style="text-align: center;">未添加联系我们地图图片</h4>
+                    </notempty>
+                </div>
+            </div>
+            <div class="m_h_60"></div>
+        </div>
+    </div>
+
+    <include file="public@footer"/>
+</block>

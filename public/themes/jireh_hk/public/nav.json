@@ -1,0 +1,33 @@
+{
+  "name": "导航栏信息",
+  "action": "public/nav",
+  "description": "网站导航部分信息内容",
+  "is_public": "1",
+  "order": "1.0.0",
+  "more": {
+    "vars": {
+      "logo": {
+        "title": "网站首页LOGO",
+        "value": "",
+        "type": "image",
+        "tip": "请选择LOGO图片，建议底色为白色（.jpg）或透明（.png）"
+      },
+      "nav_id": {
+        "title": "导航",
+        "value": "",
+        "type": "text",
+        "tip": "请选择需要显示导航栏",
+        "dataSource":{
+          "api": "admin/Nav/index",
+          "multi": true
+        },
+        "rule": {
+          "require": true
+        },
+        "message":{
+          "require":"导航不能为空"
+        }
+      }
+    }
+  }
+}

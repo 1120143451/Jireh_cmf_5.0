@@ -9,7 +9,7 @@
     <include file="public@head" />
 
     <block name="head">
-        <title>以勒人才管理顧問有限公司</title>
+        <title><block name="title"></block> {$site_info.site_name|default='以勒人才管理顾问有限公司'}</title>
     </block>
 
     <hook name="before_head_end" />
@@ -25,7 +25,6 @@
         <script>
             index();
             pageNav('headNavBtn','head-list-nav');
-            document.title=indexTrips.tr_companyName;
         </script>
     </block>
     <hook name="before_body_end" />

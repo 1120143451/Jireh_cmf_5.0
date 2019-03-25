@@ -1,0 +1,52 @@
+<extend name="public@base"/>
+<block name="title">Contact - </block>
+<block name="body">
+    <!-- route S -->
+    <div class="d_com_route_container">
+        <div class="d_com_route">
+            <span class="d_left route_link" style="font-family: bankgothic_md_bt_mediumRg;">
+                <a href="__ROOT__/">Home</a><i></i><a href="contact.html" class="selected">Contact</a>
+            </span>
+        </div>
+    </div>
+    <!-- route E -->
+
+    <div class="d_contact_con_container">
+        <div class="d_contact_content">
+            <div class="d_com_contact_tit_cn_en mt_70">
+                <php>
+                    $contactAsTitle = cutting_name($theme_vars['contact_us_title']);
+                </php>
+                <div class="d_com_contact_tit_en">{$contactAsTitle.2|default=''}</div>
+            </div>
+
+            <div class="contact_thr_box clearfix mt_60">
+                <ul class="clearfix">
+                    <li class="d_com_contact_address">
+                        <i></i>
+                        <span style="font-family: bankgothic_md_bt_mediumRg;">
+                            {$theme_vars.province|default=''}{$theme_vars.city|default=''}{$theme_vars.region|default=''}
+                            <br>
+                            {$theme_vars.street|default=''}
+                        </span>
+                    </li>
+                    <li class="d_com_contact_email"><i></i><span>{$theme_vars.email|default=''}</span></li>
+                    <li class="d_com_contact_tel"><i></i><span>+{$theme_vars.phone|default=''}</span></li>
+                </ul>
+            </div>
+
+            <div class="d_com_contact_map_box mt_70">
+                <div class="d_com_contact_map_box mt_70">
+                    <notempty name="$theme_vars.map_img">
+                        <img src="{$theme_vars.map_img|cmf_get_image_url}">
+                    <else/>
+                        <h4 style="text-align: center;font-family: bankgothic_md_bt_mediumRg;">Did not add contact us map image</h4>
+                    </notempty>
+                </div>
+            </div>
+            <div class="m_h_60"></div>
+        </div>
+    </div>
+
+    <include file="public@footer"/>
+</block>

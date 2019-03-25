@@ -7,7 +7,7 @@
         </div>
         <div class="head-nav-box">
             <div id="pageMask"></div>
-            <div id="headNavBtn"><span class="tr_menuNav">導航</span></div>
+            <div id="headNavBtn">导航</div>
             <notempty name="$theme_vars.nav_id">
                 <navigation nav-id="$theme_vars.nav_id" root="ul" class="head-list-nav">
                     <navigationMenu root="">
@@ -19,14 +19,14 @@
                     </navigationMenu>
                 </navigation>
             <else/>
-                <ul>未设置导航请到后台模板管理设置</ul>
+                <ul>未设置导航，请到后台模板管理设置。</ul>
             </notempty>
 
         </div>
         <div class="tab-font">
-            <a href="javascript:;" onclick="langTab(0)" class="zh_click">简</a>
-            <a href="javascript:;" onclick="langTab(1)" class="zh_click">繁</a>
-            <a href="javascript:;" onclick="langTab(2)" class="zh_click">EN</a>
+            <a href="/?lang=zh-cn" onclick="langTab(0)" class="zh_click">简</a>
+            <a href="/?lang=zh-hk" onclick="langTab(1)" class="zh_click">繁</a>
+            <a href="/?lang=en-us" onclick="langTab(2)" class="zh_click">EN</a>
         </div>
     </div>
 </div>

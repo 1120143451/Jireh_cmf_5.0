@@ -1,0 +1,33 @@
+<div class="section fp-auto-height">
+    <!-- seventh column S -->
+    <div class="foot_container clearfix">
+        <div class="foot clearfix">
+            <div class="foot_ltd_catnav">
+                <div class="links">
+                    <links>
+                        <a href="{$vo.url|default=''}" target="{$vo.target|default=''}">{$vo.name|default=''}</a>
+                    </links>
+                </div>
+                <h3>{$theme_vars.quick_links_title|default=''}</h3>
+                <ul>
+                    <volist name="$theme_vars.quick_links" id="vo">
+                        <li><a href="{$vo.link|default='javascript:;'}" target="{$vo.target|default='_blank'}">{$vo.title|default=''}</a></li>
+                    </volist>
+                </ul>
+            </div>
+            <div class="foot_ltd_address">
+                <php>$contact_title = cutting_name($theme_vars['contact_us_title'])</php>
+                <h3>{$contact_title.1|default=''}</h3>
+                <ul>
+                    <li><i class="icon_2"></i>{$theme_vars.phone|default=''}</li>
+                    <li><i class="icon_4"></i>{$theme_vars.email|default=''}</li>
+                    <li>Fax: {$theme_vars.fax|default=''}</li>
+                    <li><i class="icon_1"></i>{$theme_vars.province|default=''}{$theme_vars.city|default=''}{$theme_vars.region|default=''}{$theme_vars.street|default=''}</li>
+                </ul>
+            </div>
+            <div class="foot_ltdint_qrcode"><img src="{$theme_vars.footer_logo|cmf_get_image_url|default=''}"></div>
+        </div>
+    </div>
+    <!-- seventh column E -->
+    <div class="foot_b">Copyright ©2019 tianshiji.com</div>
+</div>

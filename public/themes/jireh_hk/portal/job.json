@@ -1,0 +1,26 @@
+{
+  "name": "招贤纳才信息",
+  "action": "public/job",
+  "description": "招贤纳才配置信息",
+  "order": "1.0.2",
+  "more": {
+    "widgets": {
+      "job": {
+        "title": "招贤纳才信息",
+        "display": "1",
+        "vars": {
+          "category_id": {
+            "title": "招贤纳才文章分类",
+            "value": "",
+            "type": "text",
+            "dataSource":{
+              "api": "portal/Category/index",
+              "multi": false
+            },
+            "tip": "请选择招贤纳才显示的文章分类"
+          }
+        }
+      }
+    }
+  }
+}

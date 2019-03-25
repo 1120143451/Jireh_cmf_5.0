@@ -1,0 +1,91 @@
+{
+  "name": "底部信息",
+  "action": "public/footer",
+  "description": "网站底部信息内容",
+  "is_public": "1",
+  "order": "1.0.0",
+  "more": {
+    "vars": {
+      "quick_links_title": {
+        "title": "快速链接标题",
+        "value": "",
+        "type": "text"
+      },
+      "quick_links": {
+        "title": "快速链接",
+        "value": [],
+        "type": "array",
+        "item": {
+          "title": {
+            "title": "标题",
+            "value": "",
+            "type": "text"
+          },
+          "link": {
+            "title": "跳转链接",
+            "value": "",
+            "type": "text",
+            "tip": "需要跳转的网络链接"
+          },
+          "target": {
+            "title": "链接跳转方式",
+            "value": "",
+            "type": "select",
+            "options": {
+              "_blank": "新窗口打开",
+              "_self": "本窗口打开"
+            },
+            "tip": "网络链接的跳转方式"
+          }
+        },
+        "tip": "快速链接的跳转链接"
+      },
+      "contact_us_title": {
+        "title": "联系我们标题",
+        "value": "",
+        "type": "text",
+        "tip": "简繁英请用 \"|\" 分隔，如：简体标题|繁体标题|英文标题"
+      },
+      "phone": {
+        "title": "联系电话",
+        "value": "",
+        "type": "text"
+      },
+      "email": {
+        "title": "联系邮箱",
+        "value": "",
+        "type": "text"
+      },
+      "fax": {
+        "title": "传真",
+        "value": "",
+        "type": "text"
+      },
+      "province": {
+        "title": "公司地址(省)",
+        "value": "",
+        "type": "text"
+      },
+      "city": {
+        "title": "公司地址(市)",
+        "value": "",
+        "type": "text"
+      },
+      "region": {
+        "title": "公司地址(区)",
+        "value": "",
+        "type": "text"
+      },
+      "street": {
+        "title": "公司地址(街道)",
+        "value": "",
+        "type": "text"
+      },
+      "footer_logo": {
+        "title": "网站底部 LOGO",
+        "value": "",
+        "type": "image"
+      }
+    }
+  }
+}

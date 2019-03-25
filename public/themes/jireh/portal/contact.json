@@ -1,0 +1,16 @@
+{
+  "name": "联系我们信息",
+  "action": "public/job",
+  "description": "联系我们配置信息",
+  "order": "1.0.3",
+  "more": {
+    "vars": {
+      "map_img": {
+        "title": "地图图片",
+        "value": "",
+        "type": "image",
+        "tip": "联系我们地图图片"
+      }
+    }
+  }
+}

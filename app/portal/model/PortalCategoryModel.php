@@ -213,5 +213,4 @@ class PortalCategoryModel extends Model
         return $result;
     }
 
-
 }
